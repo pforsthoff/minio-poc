@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  minio:
+    container_name: minio
+    image: minio/minio
+    ports:
+      - 9000:9000
+    environment:
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+    #Must be multi-volume in order for versioning to work
+    volumes:
+      - ./minio-data1:/data1
+      - ./minio-data2:/data2
+      - ./minio-data3:/data3
+      - ./minio-data4:/data4
+    command: server /data{1...4}
+
+#volumes:
+  minio-data1:
+  minio-data2:
+  minio-data3:
+  minio-data4:
